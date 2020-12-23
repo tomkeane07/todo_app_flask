@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from userDB.UserDbHelper import user_exists, verify_user, seed_user
+from ..usersDB.UserDbHelper import user_exists, verify_user, seed_user
 
 # route_helper
 

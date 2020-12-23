@@ -1,6 +1,6 @@
 from flask import Flask, request
-from viewLogic.registerLogin import login_user, register_user, render_register_login
-from viewLogic.about import render_about
+from .viewLogic.registerLogin import login_user, register_user, render_register_login
+from .viewLogic.about import render_about
 
 app = Flask(__name__)
 
@@ -23,6 +23,3 @@ def loginuser():
 def registeruser():
     if request.method == 'POST':
         return register_user(request)
-
-if __name__ == '__main__':
-    app.run(port=7000, debug=True)

@@ -1,5 +1,5 @@
 import sqlite3
-import userDB.schema
+from . import schema
 
 def do_userDB_req(req_string):
     connection = sqlite3.connect('users.db', check_same_thread=False)
@@ -46,4 +46,4 @@ def user_exists(username):
         FROM users
         WHERE username = '{username}';
     """.format(username=username)
-    return not do_userDB_req(req_string)
+    return not len(do_userDB_req(req_string))==0
