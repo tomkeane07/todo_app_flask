@@ -1,0 +1,18 @@
+{% extends "dashboard/_structure.html" %}
+
+{% block main %}
+    <form action="/loginuser" method="post">
+        <label>log in</label>
+        <input placeholder="Username" name="loginuser" type="text">
+        <input placeholder="Password" name="loginpassword" type="password">
+        <input type="submit">
+    </form>
+
+    <form action="/registeruser" method="post">
+        <label>register</label>
+        <input placeholder="Username" name="registerusername" type="text">
+        <input placeholder="Password" name="registerpassword" type="password">
+        <input type="submit">
+    </form>
+<p>{{ message }}</p>
+{% endblock main %}

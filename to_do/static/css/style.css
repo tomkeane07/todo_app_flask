@@ -1,0 +1,31 @@
+html, body {
+  background-color: orange
+}
+
+.home {
+  position:fixed;
+  background-image: url('../img/dublin-zoo-county-dublin.jpg');
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+}
+
+.penguins {
+  position:fixed;
+  background-image: url('../img/penguins_background.jpg');
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+}
+
+.about p {
+  position: relative;
+  padding-right: 50px;
+  float:left;
+ }
+
+.about img {
+  position: absolute;
+  width: 150px;
+  float:right;
+}
