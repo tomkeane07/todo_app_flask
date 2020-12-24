@@ -1,5 +1,4 @@
 import sqlite3
-from . import schema
 
 def do_userDB_req(req_string):
     connection = sqlite3.connect('users.db', check_same_thread=False)

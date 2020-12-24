@@ -8,7 +8,7 @@ def init_users_db():
         """CREATE TABLE IF NOT EXISTS users(
                 pk INTEGER PRIMARY KEY AUTOINCREMENT,
                 username VARCHAR(16),
-                password VARCHAR(32),
+                password VARCHAR(32)
         );"""
     )
     connection.commit()
@@ -20,10 +20,10 @@ def init_to_do_db(user_key):
     cursor = connection.cursor()
 
     cursor.execute(
-        """CREATE TABLE IF NOT EXISTS users(
+        """CREATE TABLE IF NOT EXISTS to_do_list(
                 pk INTEGER PRIMARY KEY AUTOINCREMENT,
                 username VARCHAR(16),
-                password VARCHAR(32),
+                password VARCHAR(32)
         );"""
     )
     connection.commit()

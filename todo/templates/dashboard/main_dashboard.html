@@ -1,4 +1,4 @@
-{% extends "dashboard/_structure.html" %}
+{% extends "dashboard/structure.html" %}
 {% block title %}dashboard{% endblock title %}
 
 
@@ -6,5 +6,11 @@
 <div class='dashboard'>
     <h1>this is your dashboard</h1>
     {{ message}}
+</div>
+
+<div class="to_do_list">
+    <ol name="to_do_list">
+        {{to_do_list}}
+    </ol>
 </div>
 {% endblock main %}

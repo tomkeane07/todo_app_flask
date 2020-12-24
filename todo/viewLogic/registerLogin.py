@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from ..usersDB.UserDbHelper import user_exists, verify_user, seed_user
+from ..db.UserDbHelper import user_exists, verify_user, seed_user
 
 # route_helper
 
@@ -17,7 +17,7 @@ def login_user(request):
             return render_template('registerlogin.html', message=error_msg)
     else:
         message='user "{username}" does not exist'.format(username=username)
-        return render_template('dashboard/main_dashboard.html', message=message)
+        return render_template('registerLogin.html', message=message)
 
 def register_user(request):
     username = request.form['registerusername']

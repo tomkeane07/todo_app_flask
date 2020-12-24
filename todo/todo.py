@@ -1,6 +1,7 @@
 from flask import Flask, request
 from .viewLogic.registerLogin import login_user, register_user, render_register_login
 from .viewLogic.about import render_about
+from .db.schemas import init_users_db
 
 app = Flask(__name__)
 
@@ -23,3 +24,11 @@ def loginuser():
 def registeruser():
     if request.method == 'POST':
         return register_user(request)
+
+
+@app.route('/dashboard', methods=['GET'])
+def dashboard():
+    if request.method == 'GET':
+        return register_user(request)
+
+init_users_db()

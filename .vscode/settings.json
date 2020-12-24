@@ -1,0 +1,11 @@
+{
+    "python.pythonPath": "c:\\Users\\admin\\AppData\\Local\\Programs\\Python\\Python38\\pythonw.exe",
+    "python.analysis.extraPaths": ["./todo"],
+    "saveAndRunExt": {
+        "commands": [
+            {
+                "cmd": "run.bat"
+            }
+        ]
+  }
+}
