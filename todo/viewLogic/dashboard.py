@@ -2,8 +2,6 @@
 from flask.templating import render_template
 import numpy as np
 from flask.globals import request
-from todo.models.ToDoList import to_do_list
-
 
 to_do_list = ["AAAA", "BBB", "CCC"]
 

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang = 'en'>
+
+    <head>
+        <meta charset = "utf-8">
+        <link rel="stylesheet"  href="/static/css/main.css">
+        <link rel="stylesheet" href="/static/css/sidenav.css">
+        <title>{% block title %}to do{% endblock title %}</title>
+    </head>
+
+    <body>
+        <div class="sidenav">
+            <a href="/about">About</a>
+            <a href="/PrivacyPolicy">Privacy Policy</a>
+        </div>
+
+        <div class="main">
+            <h1>to do</h1>
+            <div>
+                {% block main %}
+                <h1>This only shows on structure.html</h1>
+                {% endblock main %}
+            </div>
+        </div>
+    </body>
+</html>

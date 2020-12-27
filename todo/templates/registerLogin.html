@@ -1,6 +1,7 @@
-{% extends "dashboard/structure.html" %}
+{% extends "structure.html" %}
 
 {% block main %}
+    <p>{{ message }}</p>
     <form action="/loginuser" method="post">
         <label>log in</label>
         <input placeholder="Username" name="loginuser" type="text">
@@ -14,5 +15,4 @@
         <input placeholder="Password" name="registerpassword" type="password">
         <input type="submit">
     </form>
-<p>{{ message }}</p>
 {% endblock main %}

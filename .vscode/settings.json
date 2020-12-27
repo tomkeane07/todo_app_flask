@@ -7,5 +7,6 @@
                 "cmd": "run.bat"
             }
         ]
-  }
+},
+"python.formatting.provider": "black"
 }
