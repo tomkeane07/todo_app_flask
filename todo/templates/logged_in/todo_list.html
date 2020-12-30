@@ -9,6 +9,8 @@
     </div>
 
     {% for task in todo_list %}
-        <p>{{ task }} </p>
+        <ul id="myUL">
+            <li>{{ task }}</li>
+        </ul>
     {% endfor %}
 {% endblock main %}
