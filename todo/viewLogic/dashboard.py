@@ -3,12 +3,8 @@ from flask.templating import render_template
 import numpy as np
 from flask.globals import request
 
-to_do_list = ["AAAA", "BBB", "CCC"]
+todo_list = ["AAAA", "BBB", "CCC"]
 
 def render_dashboard(request):
     user=request.form["username"]
-    render_template('dashboard/dashboard_main.html')
-    
-
-def get_to_do_list():
-    return to_do_list
+    render_template('dashboard/dashboard_main.html', todo_list=todo_list)

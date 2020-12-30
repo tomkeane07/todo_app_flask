@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 from ..db.UserDbHelper import user_exists, verify_user, seed_user
 
 # route_helper
@@ -11,7 +11,7 @@ def login_user(request):
     if user_exists(username):
         if verify_user(username, password):
             message = 'logged in. \nWelcome "{username}"'.format(username=username)
-            return render_template('dashboard/main_dashboard.html', message= message)
+            return render_template('logged_in/main_dashboard.html', message= message)
         else:
             error_msg='incorrect credentials'
             return render_template('registerlogin.html', message=error_msg)
@@ -31,4 +31,4 @@ def register_user(request):
         return render_template('dashboard/main_dashboard.html', message=message)
 
 def render_register_login():
-    return render_template('registerlogin.html', message='please register or log in')
+    return render_template('logged_out/registerlogin.html', message='please register or log in')

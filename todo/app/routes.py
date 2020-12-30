@@ -1,6 +1,8 @@
 from flask import request
 from ..viewLogic.registerLogin import login_user, register_user, render_register_login
 from ..viewLogic.about import render_about
+from ..viewLogic.privacypolicy import render_privacypolicy
+
 
 def set_routes(app):
     @app.route('/', methods=['GET'])
@@ -29,4 +31,4 @@ def set_routes(app):
 
     @app.route('/privacyPolicy', methods=['GET'])
     def privacyPolicy():
-        return 0
+        return render_privacypolicy() 
