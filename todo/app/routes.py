@@ -1,5 +1,6 @@
 from flask import request
-from ..viewLogic.registerLogin import login_user, register_user, render_register_login
+from ..viewLogic.dashboard import render_dashboard
+from ..viewLogic.registerLogin import handle_login, handle_register, render_register_login
 from ..viewLogic.about import render_about
 from ..viewLogic.privacypolicy import render_privacypolicy
 
@@ -17,17 +18,17 @@ def set_routes(app):
     @app.route('/loginuser', methods=['POST'])
     def loginuser():
         if request.method == 'POST':
-            return login_user(request)
+            return handle_login(request)
 
     @app.route('/registeruser', methods=['POST'])
     def registeruser():
         if request.method == 'POST':
-            return register_user(request)
+            return handle_register(request)
 
     @app.route('/dashboard', methods=['GET'])
     def dashboard():
         if request.method == 'GET':
-            return register_user(request)
+            return render_dashboard()
 
     @app.route('/privacyPolicy', methods=['GET'])
     def privacyPolicy():
