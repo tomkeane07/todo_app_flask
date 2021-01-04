@@ -34,7 +34,7 @@ def set_routes(app):
     def privacyPolicy():
         return render_privacypolicy()
     
-    @app.route('/tasks', methods=['GET', 'POST', 'DELETE'])
+    @app.route('/tasks', methods=['GET', 'POST', 'REMOVE'])
     def tasks():
         return #handle_tasks_db_req(request)
 
