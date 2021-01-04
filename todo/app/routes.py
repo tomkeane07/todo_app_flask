@@ -30,6 +30,6 @@ def set_routes(app):
         if request.method == 'GET':
             return render_dashboard()
 
-    @app.route('/privacyPolicy', methods=['GET'])
+    @app.route('/privacypolicy', methods=['GET'])
     def privacyPolicy():
         return render_privacypolicy() 
