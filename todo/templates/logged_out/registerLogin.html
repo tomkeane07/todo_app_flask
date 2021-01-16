@@ -1,18 +1,17 @@
 {% extends "structure.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
 
 {% block main %}
-    <p>{{ message }}</p>
     <form action="/loginuser" method="post">
         <label>log in</label>
-        <input placeholder="Username" name="loginuser" type="text">
-        <input placeholder="Password" name="loginpassword" type="password">
-        <input type="submit">
+        {{ wtf.quick_form(LoginForm)}}
     </form>
-
+<br>
     <form action="/registeruser" method="post">
         <label>register</label>
-        <input placeholder="Username" name="registerusername" type="text">
-        <input placeholder="Password" name="registerpassword" type="password">
-        <input type="submit">
+        {{ wtf.quick_form(RegisterForm)}}
     </form>
+<br>
+    {{message}}
 {% endblock main %}

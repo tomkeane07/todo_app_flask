@@ -1,5 +1,7 @@
 {% extends "structure.html" %}
 {% block title %}dashboard{% endblock title %}
+{% import "bootstrap/wtf.html" as wtf %}
+
 
 {% block main %}
 <div class='dashboard'>
@@ -11,5 +13,11 @@
     {% with todo_list=todo_list %}
         {% include 'logged_in/todo_list.html' %}
     {% endwith %}
+</div>
+<br>
+<div>
+    <form action="/chooselist" post>
+        {{wtf.quick_form(list_options)}}
+    </form>
 </div>
 {% endblock main %}
