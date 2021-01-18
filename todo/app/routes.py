@@ -17,13 +17,11 @@ def set_routes(app):
 
     @app.route('/loginuser', methods=['POST'])
     def loginuser():
-        if request.method == 'POST':
-            return handle_login(request)
+        return handle_login(request)
 
     @app.route('/registeruser', methods=['POST'])
     def registeruser():
-        if request.method == 'POST':
-            return handle_register(request)
+        return handle_register(request)
 
     @app.route('/dashboard', methods=['GET', 'POST'])
     def dashboard():
