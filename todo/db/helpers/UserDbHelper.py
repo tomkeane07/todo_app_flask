@@ -1,48 +1,27 @@
 import sqlite3
+from ..schemas import db
+from flask_user import login_required, UserManager, UserMixin
+from sqlalchemy.sql import exists
 
-def do_userDB_req(req_string):
-    connection = sqlite3.connect('users.db', check_same_thread=False)
-    cursor = connection.cursor()
-
-    cursor.execute(req_string)
-
-    sql_object = cursor.fetchall()
-    connection.commit()
-    cursor.close()
-    connection.close()
-    return sql_object
+class User(db.Model, UserMixin):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
+    # User authentication information. The collation='NOCASE' is required
+    # to search case insensitively when USER_IFIND_MODE is 'nocase_collation'.
+    username = db.Column(db.String(100, collation='NOCASE'), nullable=False, unique=True)
+    password = db.Column(db.String(255), nullable=False, server_default='')
 
 def seed_user(username, password):
     if user_exists(username) == True:
         raise Exception("user already exists")
-    req_string = """
-        INSERT INTO users(
-            username,
-            password
-        )
-        VALUES(
-            '{username}',
-            '{password}'
-        );
-    """.format(username=username, password=password)
-    do_userDB_req( req_string )
+    user = User(username=username, password=password)
+    db.session.add(user)
+    db.session.commit()
 
 def verify_user(username, password):
-    req_string = """
-        SELECT * FROM users
-        WHERE username='{username}' AND password='{password}'
-        ORDER BY pk DESC;
-    """.format(username=username, password=password)
-    if len(do_userDB_req(req_string)) > 0:
-        return True
-    else:
-        return False
+    return db.session.query(exists().where(User.username==username and User.password==password)).scalar()
 
 
 def user_exists(username):
-    req_string = """
-        SELECT *
-        FROM users
-        WHERE username = '{username}';
-    """.format(username=username)
-    return not len(do_userDB_req(req_string))==0
+    return db.session.query(exists().where(User.username==username )).scalar()

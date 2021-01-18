@@ -10,11 +10,12 @@ todo_list2 = ["DD", "EE", "FF"]
 
 my_lists = [(todo_list1, "mylist1"), (todo_list2, "mylist2")]
 
-def dashboard_request_handler(request, username):
+def dashboard_request_handler(request):
+    username = request.args.get("username")
     if request.method == 'GET':
-        return render_dashboard(request, username)
+        return render_dashboard(username)
 
-def render_dashboard(request, username):
+def render_dashboard(username):
     return render_template(
         'logged_in/main_dashboard.html',
         todo_list=my_lists[0][0],

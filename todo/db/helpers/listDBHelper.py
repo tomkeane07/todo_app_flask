@@ -1,4 +1,13 @@
 import sqlite3
+from ..schemas import db
+
+
+class Lists(db.Model):
+    __tablename__ = 'lists'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    title = db.Column(db.String(100), nullable=False)
+
 def do_taskDB_req(req_string):
     connection = sqlite3.connect('lists.db', check_same_thread=False)
     cursor = connection.cursor()

@@ -1,4 +1,11 @@
 import sqlite3
+from ..schemas import db
+
+class Tasks(db.Model):
+    __tablename__ = 'tasks'
+    id = db.Column(db.Integer, primary_key=True)
+    list_id = db.Column(db.Integer, db.ForeignKey("lists.id"))
+    description = db.Column(db.String(200), nullable=False)
 
 def do_taskDB_req(req_string):
     connection = sqlite3.connect('tasks.db', check_same_thread=False)

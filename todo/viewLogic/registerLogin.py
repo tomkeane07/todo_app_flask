@@ -28,10 +28,9 @@ def render_register_login(
         RegisterForm=RegisterForm()
     )
 
-def handle_register():
-    form = RegisterForm()
-    username=form.username.data
-    password=form.password.data
+def handle_register(request):
+    username=request.form.get('username')
+    password=request.form.get('password')
     if user_exists(username):
         message = "user '{username}' already exists".format(username=username)
         return render_register_login(message=message)
@@ -40,11 +39,9 @@ def handle_register():
         message = 'Account created for "{username}"'.format(username=username)
         return login_user(message)
 
-def handle_login():
-    form = LoginForm()
-    username=form.username.data
-    password=form.password.data
-    print(username)
+def handle_login(request):
+    username=request.form.get('username')
+    password=request.form.get('password')
     if user_exists(username):
         if verify_user(username, password):
             message = 'logged in. \nWelcome "{username}"'.format(username=username)
@@ -57,5 +54,5 @@ def handle_login():
         return render_template('logged_out/registerLogin.html', message=message)
 
 
-def login_user(username, message):
+def login_user(username, message=""):
     return redirect(url_for('dashboard', message=message, username=username))

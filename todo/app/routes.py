@@ -3,7 +3,6 @@ from ..viewLogic.dashboard import dashboard_request_handler
 from ..viewLogic.registerLogin import handle_login, handle_register, render_register_login
 from ..viewLogic.about import render_about
 from ..viewLogic.privacypolicy import render_privacypolicy
-import logging
 
 
 def set_routes(app):
@@ -18,18 +17,17 @@ def set_routes(app):
 
     @app.route('/loginuser', methods=['POST'])
     def loginuser():
-        app.logger.info(request)
         if request.method == 'POST':
-            return handle_login()
+            return handle_login(request)
 
     @app.route('/registeruser', methods=['POST'])
     def registeruser():
         if request.method == 'POST':
-            return handle_register()
+            return handle_register(request)
 
-    @app.route('/dashboard', methods=['GET', 'POST'], subdomain="<username>")
-    def dashboard(request, username):
-        return dashboard_request_handler(request, username)
+    @app.route('/dashboard', methods=['GET', 'POST'])
+    def dashboard():
+        return dashboard_request_handler(request)
 
     @app.route('/privacypolicy', methods=['GET'])
     def privacyPolicy():
