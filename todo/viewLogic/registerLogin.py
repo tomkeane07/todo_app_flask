@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for
 from werkzeug.utils import redirect
-from ..db.UserDbHelper import user_exists, verify_user, seed_user
+from ..db.helpers.UserDbHelper import user_exists, verify_user, seed_user
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import Length, InputRequired
 from flask_wtf import Form
@@ -13,7 +13,6 @@ class RegisterForm(Form):
     username = StringField('username', validators=[InputRequired()])
     password = PasswordField('password', validators=[InputRequired(), Length(min=5, max=10)])
     registerBtn = SubmitField('Register')
-
 
 class LoginForm(Form):
     username = StringField('username', validators=[InputRequired()])
@@ -28,7 +27,6 @@ def render_register_login(
         LoginForm=LoginForm(),
         RegisterForm=RegisterForm()
     )
-
 
 def handle_register():
     form = RegisterForm()

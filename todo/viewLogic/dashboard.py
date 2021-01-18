@@ -10,16 +10,21 @@ todo_list2 = ["DD", "EE", "FF"]
 
 my_lists = [(todo_list1, "mylist1"), (todo_list2, "mylist2")]
 
+
 def render_dashboard(request):
+    print(request)
     return render_template(
         'logged_in/main_dashboard.html',
         todo_list=my_lists[0][0],
         username=request.args.get('username'),
         list_options=list_options()
     )
+    
+
+#def
+
+# class todo_list_view(my_lists):
 
 class list_options(Form):
     choose_list = SelectField(u'choose list', choices = my_lists)
     chooselist_btn = SubmitField("click here to choose a to-do list")
-# class todo_list_view(my_lists):
-    

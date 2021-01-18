@@ -2,7 +2,6 @@
 {% block title %}dashboard{% endblock title %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-
 {% block main %}
 <div class='dashboard'>
     <h1>this is your dashboard</h1>
@@ -16,7 +15,7 @@
 </div>
 <br>
 <div>
-    <form action="/chooselist" post>
+    <form action="dashboard/chooselist" method=post>
         {{wtf.quick_form(list_options)}}
     </form>
 </div>

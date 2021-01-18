@@ -12,17 +12,17 @@ def do_taskDB_req(req_string):
     connection.close()
     return sql_object
 
-def seed_task(user_id, description):
+def seed_task(list_id, description):
     req_string = """
         INSERT INTO tasks(
-            user_id,
+            list_id,
             description
         )
         VALUES(
-            '{user_id}',
+            '{list_id}',
             '{description}'
         );
-    """.format(user_id=user_id, description=description)
+    """.format(user_id=list_id, description=description)
     do_taskDB_req( req_string )
 
 def remove_task(task_id):
