@@ -1,9 +1,9 @@
 from flask import request
-from werkzeug.utils import redirect
-from ..viewLogic.dashboard import render_dashboard, handle_post
+from ..viewLogic.dashboard import dashboard_request_handler
 from ..viewLogic.registerLogin import handle_login, handle_register, render_register_login
 from ..viewLogic.about import render_about
 from ..viewLogic.privacypolicy import render_privacypolicy
+import logging
 
 
 def set_routes(app):
@@ -18,6 +18,7 @@ def set_routes(app):
 
     @app.route('/loginuser', methods=['POST'])
     def loginuser():
+        app.logger.info(request)
         if request.method == 'POST':
             return handle_login()
 
@@ -27,12 +28,8 @@ def set_routes(app):
             return handle_register()
 
     @app.route('/dashboard', methods=['GET', 'POST'], subdomain="<username>")
-    def dashboard():
-        if request.method == 'GET':
-            return render_dashboard(request)
-        
-        if request.method == 'POST':
-            return handle_post(request)
+    def dashboard(request, username):
+        return dashboard_request_handler(request, username)
 
     @app.route('/privacypolicy', methods=['GET'])
     def privacyPolicy():
