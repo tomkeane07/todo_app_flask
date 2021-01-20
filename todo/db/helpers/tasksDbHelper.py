@@ -12,5 +12,5 @@ def seed_task(list_id, description):
     db.session.add(list)
     db.session.commit()
 
-def remove_task(task_id):
-    db.session.delete(List).where(list_id==list_id)
+# def remove_task(task_id):
+#     db.session.delete(Task).where(List.list_id==list_id)

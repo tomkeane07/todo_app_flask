@@ -1,4 +1,3 @@
-import sqlite3
 from ..schemas import db
 
 
