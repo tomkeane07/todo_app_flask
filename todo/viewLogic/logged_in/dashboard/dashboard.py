@@ -1,9 +1,11 @@
 # display username and to-do list
-from flask.globals import request, session
+from flask.globals import session
 from flask.templating import render_template
-from .lists import Chooselist_dropdown
+from .main_list import add_itemForm
+from .list_options import Add_ListForm, Chooselist_dropdown
 from ....db.helpers.UserDbHelper import getUser_byUsername_asDict
 from flask import session
+
 
 
 todo_list1 = ["AAAA", "BBB", "CCC"]
@@ -16,11 +18,14 @@ def dashboard_request_handler(request):
     if request.method == 'GET':
         return render_dashboard(username)
 
-def render_dashboard(username, lists=None):
+def render_dashboard(username):
     session['user'] = getUser_byUsername_asDict(username)
     return render_template(
         'logged_in/main_dashboard.html',
-        todo_list=my_lists[0][0],
+        main_list_title=my_lists[0][1],
+        main_list=my_lists[0][0],
         username=username,
-        chooselist_dropdown=Chooselist_dropdown()
+        Add_ListForm=Add_ListForm(),
+        chooselist_dropdown=Chooselist_dropdown(),
+        add_itemForm=add_itemForm()
     )

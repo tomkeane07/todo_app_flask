@@ -1,6 +1,6 @@
 from flask import request
 from ...viewLogic.logged_in.dashboard.dashboard import dashboard_request_handler
-from ...viewLogic.logged_in.dashboard.lists import choose_list
+from ...viewLogic.logged_in.dashboard.list_options import choose_list
 
 
 def set_dashboard_routes(app):

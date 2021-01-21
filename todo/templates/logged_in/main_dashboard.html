@@ -3,20 +3,15 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block main %}
-<div class='dashboard'>
+<div>
     <h1>this is your dashboard</h1>
-    {{ message}}
+    {{ message }}
 </div>
 
-<div class="to_do_list">
-    {% with todo_list=todo_list %}
-        {% include 'logged_in/todo_list.html' %}
-    {% endwith %}
-</div>
-<br>
-<div>
-    <form action="dashboard/chooselist" method=post>
-        {{wtf.quick_form(chooselist_dropdown)}}
-    </form>
-</div>
+{% with todo_list=todo_list %}
+    {% include 'logged_in/dashboard/todo_list.html' %}
+{% endwith %}
+<br><br>
+
+{% include 'logged_in/dashboard/list_options.html' %}
 {% endblock main %}

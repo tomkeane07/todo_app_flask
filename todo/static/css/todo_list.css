@@ -112,3 +112,7 @@ input {
 .addBtn:hover {
   background-color: #bbb;
 }
+
+.no-label.control-label {
+display: none;
+}
