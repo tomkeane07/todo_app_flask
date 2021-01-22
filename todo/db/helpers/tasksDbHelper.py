@@ -1,11 +1,5 @@
-import sqlite3
-from ..schemas import db
-
-class Task(db.Model):
-    __tablename__ = 'tasks'
-    id = db.Column(db.Integer, primary_key=True)
-    list_id = db.Column(db.Integer, db.ForeignKey("lists.id"))
-    description = db.Column(db.String(200), nullable=False)
+from ..db import db
+from ..models.Task import Task
 
 def seed_task(list_id, description):
     task = Task(list_id=list_id, description=description)
@@ -14,3 +8,8 @@ def seed_task(list_id, description):
 
 # def remove_task(task_id):
 #     db.session.delete(Task).where(List.list_id==list_id)
+
+def getAllTasks(list_id=None):
+    if list_id is None:
+        return Task.query.all()
+    return Task.query.filter_by(list_id=list_id)

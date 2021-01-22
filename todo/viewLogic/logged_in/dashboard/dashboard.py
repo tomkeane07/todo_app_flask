@@ -3,10 +3,7 @@ from flask.globals import session
 from flask.templating import render_template
 from .main_list import add_itemForm
 from .list_options import Add_ListForm, Chooselist_dropdown
-from ....db.helpers.UserDbHelper import getUser_byUsername_asDict
-from flask import session
-
-
+from ....db.helpers.userDbHelper import getUser_byUsername_asDict
 
 todo_list1 = ["AAAA", "BBB", "CCC"]
 todo_list2 = ["DD", "EE", "FF"]

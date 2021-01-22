@@ -1,6 +1,6 @@
 from flask import render_template, url_for
 from werkzeug.utils import redirect
-from ...db.helpers.UserDbHelper import user_exists, verify_user, seed_user
+from ...db.helpers.userDbHelper import user_exists, verify_user, seed_user
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import Length, InputRequired
 from flask_wtf import Form
