@@ -3,18 +3,18 @@ from werkzeug.utils import redirect
 from ...db.helpers.userDbHelper import user_exists, verify_user, seed_user
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import Length, InputRequired
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 
 # route_helper
 
 # Home
 
-class RegisterForm(Form):
+class RegisterForm(FlaskForm):
     username = StringField('username', validators=[InputRequired()])
     password = PasswordField('password', validators=[InputRequired(), Length(min=5, max=10)])
     registerBtn = SubmitField('Register')
 
-class LoginForm(Form):
+class LoginForm(FlaskForm):
     username = StringField('username', validators=[InputRequired()])
     password = PasswordField('password', validators=[InputRequired(), Length(min=5, max=10)])
     loginBtn = SubmitField("Log in")
@@ -37,7 +37,7 @@ def handle_register(request):
     else:
         seed_user(username, password)
         message = 'Account created for "{username}"'.format(username=username)
-        return login_user(message)
+        return login_user(username=username, message=message)
 
 def handle_login(request):
     username=request.form.get('username')

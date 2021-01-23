@@ -4,11 +4,8 @@ from flask.templating import render_template
 from .main_list import add_itemForm
 from .list_options import Add_ListForm, Chooselist_dropdown
 from ....db.helpers.userDbHelper import getUser_byUsername_asDict
-
-todo_list1 = ["AAAA", "BBB", "CCC"]
-todo_list2 = ["DD", "EE", "FF"]
-
-my_lists = [(todo_list1, "mylist1"), (todo_list2, "mylist2")]
+from ....db.helpers.listDbHelper import get_list_by_id, get_users_lists_as_list_tuples
+from ....db.helpers.tasksDbHelper import get_list_tasks
 
 def dashboard_request_handler(request):
     username = request.args.get("username")
@@ -16,13 +13,23 @@ def dashboard_request_handler(request):
         return render_dashboard(username)
 
 def render_dashboard(username):
-    session['user'] = getUser_byUsername_asDict(username)
+    main_list_title, main_list_tasks = prepare_dashboard_user_info(username)
+    chooselist_dropdown = Chooselist_dropdown()
+    chooselist_dropdown.list_choice.choices = get_users_lists_as_list_tuples(session['user']['id'])
     return render_template(
         'logged_in/main_dashboard.html',
-        main_list_title=my_lists[0][1],
-        main_list=my_lists[0][0],
+        main_list=main_list_title,
+        main_list_tasks=main_list_tasks,
         username=username,
         Add_ListForm=Add_ListForm(),
-        chooselist_dropdown=Chooselist_dropdown(),
+        chooselist_dropdown=chooselist_dropdown,
         add_itemForm=add_itemForm()
     )
+
+def prepare_dashboard_user_info(username):
+    session['user'] = getUser_byUsername_asDict(username)
+    main_list_id = session['user']['main_list_id']
+    print(main_list_id)
+    main_list_tasks = get_list_tasks(main_list_id)
+    main_list = get_list_by_id(main_list_id)
+    return main_list, main_list_tasks

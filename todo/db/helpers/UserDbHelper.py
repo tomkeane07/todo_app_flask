@@ -1,3 +1,4 @@
+from flask.globals import session
 from ..db import db
 from sqlalchemy.sql import exists
 from ..models.User import User
@@ -16,12 +17,17 @@ def user_exists(username):
     return db.session.query(exists().where(User.username==username )).scalar()
 
 def getUser_byUsername_asDict(username):
-    return hide_password_for_view(
+    return make_dict_object_useable(
         db.session.query(User).filter_by(username=username)
         .first().__dict__
     )
 
-def hide_password_for_view(user_dict):
+def make_dict_object_useable(user_dict):
     del user_dict["password"]
     del user_dict["_sa_instance_state"]
     return user_dict
+
+def set_users_main_list(user_id, list_id):
+    user = db.session.query(User).filter_by(id=user_id).first()
+    user.main_list_id = list_id
+    db.session.commit()

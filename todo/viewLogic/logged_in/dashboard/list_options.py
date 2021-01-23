@@ -1,28 +1,24 @@
-from flask_wtf import Form
+from werkzeug.utils import redirect
+from flask_wtf import FlaskForm
 from wtforms import SubmitField
 from wtforms.fields.core import SelectField, StringField
 from wtforms.validators import Length, InputRequired
-from ....db.helpers.listDBHelper import seed_list
-from flask import session
-from flask.templating import render_template
+from ....db.helpers.userDbHelper import set_users_main_list
+from ....db.helpers.listDbHelper import seed_list_and_return_list_id, get_users_lists_as_list_tuples
 from .main_list import add_itemForm
-
-
+from flask import session, url_for
+from flask.templating import render_template
 
 todo_list1 = ["AAAA", "BBB", "CCC"]
 todo_list2 = ["DD", "EE", "FF"]
 
 my_lists = [(todo_list1, "mylist1"), (todo_list2, "mylist2")]
 
-def choose_list(request):
-    if request.method == 'POST':
-        list_choice = request.args.get("choose_list")
-
-class Chooselist_dropdown(Form, list):
-    choose_list = SelectField(u'', choices = my_lists)
-    chooselist_btn = SubmitField("Choose List")
+class Chooselist_dropdown(FlaskForm):
+    list_choice = SelectField(u'', coerce=int)
+    chooselist_btn = SubmitField("Choose Main List")
     
-class Add_ListForm(Form):
+class Add_ListForm(FlaskForm):
     title = StringField(
         '',
         validators=[
@@ -35,20 +31,22 @@ class Add_ListForm(Form):
     )
     add_list = SubmitField('Add List')
 
-def handle_list_req(request):
+def add_list(request):
     title = request.form.get("title")
     user_id = session['user']['id']
-    print("_________")
-    print(title)
-    print(user_id)
+    new_list_id = seed_list_and_return_list_id(title=title, user_id=user_id)
+    username = session['user']['username']
+    update_user_main_list(user_id, new_list_id)
+    return redirect(url_for('dashboard', message='', username=username))
+
+def choose_mainlist(request):
+    user_id = session['user']['id']
+    get_users_lists_as_list_tuples(user_id)
     if request.method == 'POST':
-        seed_list(title=title, user_id=user_id)
-        return render_template(
-        'logged_in/main_dashboard.html',
-        main_list_title=my_lists[0][1],
-        main_list=my_lists[0][0],
-        username="kk",
-        Add_ListForm=Add_ListForm(),
-        chooselist_dropdown=Chooselist_dropdown(),
-        add_itemForm=add_itemForm()
-    )
+        chosen_list_id = request.form.get("list_choice")
+        username = session['user']['username']
+        update_user_main_list(user_id, chosen_list_id)
+        return redirect(url_for('dashboard', message='', username=username))
+
+def update_user_main_list(user_id, new_list_id):
+    set_users_main_list(user_id, new_list_id)

@@ -1,0 +1,37 @@
+{% extends "logged_in/main_dashboard.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block main %}
+    <link rel="stylesheet" href="/static/css/todo_list.css">
+    
+    <h2>main list</h2>
+    <div id="todoList" class="header">
+        <h2>
+            {{ main_list.title }}
+            <!-- <form class="delete_list_form" action='/dashboard/mainlist/delete_list' method='post' id="delete_list_form">
+                <input name="list_id" type="hidden" value="{{ main_list.id }}">
+                <button type="submit" class="remove_task_btn" form="delete_list_form">
+                    x
+                </button> -->
+            </form>
+        </h2>
+
+    </div>
+    <ul>
+        {% for task in main_list_tasks %}
+            <li>
+                {{ task.description }}
+                <form class="delete_task_form" action='/dashboard/mainlist/delete_task' method='post' id="delete_task_form">
+                    <input name="task_id" type="hidden" value="{{ task.id }}">
+                    <button type="submit" class="remove_task_btn" form="delete_task_form" >
+                        x
+                    </button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <form action='/dashboard/mainlist/add_task' method='post'>
+        {{ wtf.quick_form(add_itemForm) }}
+    </form>
+{% endblock main %}

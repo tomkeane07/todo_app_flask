@@ -2,13 +2,14 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block main %}
-    <link rel="stylesheet" href="/static/css/todo_list.css">
+    <!-- <link rel="stylesheet" href="/static/css/todo_list.css"> -->
     
-    <form action="dashboard/chooselist" method=post>
+    <h2>list options</h2>
+    <form action="dashboard/listoptions/chooselist" method=post>
         {{ wtf.quick_form(chooselist_dropdown) }}
     </form>
     <br><br>
-    <form action="dashboard/add_list" method='post'>
+    <form action="dashboard/listoptions/add_list" method='post'>
         {{ wtf.quick_form( Add_ListForm )}}
     </form>
 
